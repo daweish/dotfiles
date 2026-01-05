@@ -1,4 +1,0 @@
-Each Theme should reside in its own folder. Within that folder, create the following
-symlinks to make sure the theme functions properly
-
-XresourceColors -> the color file for this theme's terminal colors

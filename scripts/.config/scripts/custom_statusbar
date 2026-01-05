@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-while (( 1 )); do
-    time=$(date +"%Y-%m-%d %l:%M %p")
-
-    echo "${time}"
-
-    sleep 30
-done
