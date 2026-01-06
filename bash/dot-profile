@@ -1,0 +1,11 @@
+#
+# ~/.profile
+#
+
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/share/bob/nvim-bin"
+export PATH="$PATH:$HOME/.local/scripts"
+
+export EDITOR='nvim'
+export VISUAL='nvim'
+export GREP='ugrep'
