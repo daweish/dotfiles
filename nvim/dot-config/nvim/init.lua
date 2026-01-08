@@ -8,7 +8,7 @@ vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/echasnovski/mini.pick" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
-	{ src = "https://github.com/ziglang/zig.vim" },
+	{ src = "https://codeberg.org/ziglang/zig.vim" },
 	-- { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 })
 
@@ -76,6 +76,7 @@ vim.keymap.set('n', '<leader>q', ':quit<CR>')
 vim.keymap.set('n', '<leader>i', '<CMD>e $MYVIMRC<CR>')
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>y', '"+y<CR>') -- yank to system clipboard
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>d', '"+d<CR>') -- delete to system clipboard
+
 vim.keymap.set('n', '<leader>m', function()
 	vim.fn.setqflist({}, 'r')
 	vim.cmd("make")
@@ -102,6 +103,8 @@ end, { desc = "Clear search highlight on Enter" })
 
 -- Terminal setup
 local term_bufnr = nil
+local term = "bash"
+
 local function toggle_terminal()
 	-- this func will try to toggle a persistent terminal buffer
 	if term_bufnr and vim.api.nvim_buf_is_valid(term_bufnr) then
@@ -119,7 +122,8 @@ local function toggle_terminal()
 		return
 	end
 
-	vim.cmd('botright split term://pwsh')
+	local command = "botright split term://" .. term
+	vim.cmd(command)
 	vim.cmd('resize 12')
 	term_bufnr = vim.api.nvim_get_current_buf()
 end
@@ -136,6 +140,12 @@ vim.keymap.set('n', '<leader>t', toggle_terminal, { desc = 'Open a terminal' })
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = 'Exit terminal mode with Esc' })
 
 --- Configure LSPs to enable
+vim.diagnostic.config({
+	virtual_text = true,
+	signs = true,
+	update_in_insert = true,
+})
+
 vim.lsp.enable({ "lua_ls" })
 vim.lsp.config("lua_ls", {
 	settings = {
@@ -149,26 +159,23 @@ vim.lsp.config("lua_ls", {
 vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format)
 
 -- Setup for zig lsp
-vim.lsp.enable({ "zls" })
-vim.lsp.config("zls", {
-	settings = {
-		zls = {
-			semantic_tokens = "partial",
-		},
-	},
-})
-
--- should be handled by the zig.vim plugin
--- vim.api.nvim_create_autocmd("FileType", {
--- 	pattern = "zig",
--- 	callback = function()
--- 		vim.opt_local.makeprg = "zig build"
--- 	end,
--- })
-
--- Uncomment if using zig.vim plugin
 vim.g.zig_fmt_parse_errors = 0
 vim.g.zig_fmt_autosave = 0
+
+vim.lsp.config("zls", {
+	cmd = {'zls'},
+	filetypes = { 'zig' },
+	root_markers = { 'build.zig' },
+})
+vim.lsp.enable({ "zls" })
+
+vim.api.nvim_create_autocmd('BufWritePre', {
+	pattern = {"*.zig", "*.zon"},
+	callback = function(ev)
+		vim.lsp.buf.format()
+	end
+})
+
 
 -- Function for toggling the quickfix list on/off
 local function toggle_qf()

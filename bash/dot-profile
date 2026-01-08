@@ -5,6 +5,7 @@
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.local/share/bob/nvim-bin"
 export PATH="$PATH:$HOME/.local/scripts"
+export PATH="$PATH:$HOME/Code/godot/bin"
 
 export EDITOR="$(which nvim)"
 export VISUAL="$(which nvim)"
