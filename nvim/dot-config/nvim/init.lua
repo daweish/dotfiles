@@ -9,7 +9,7 @@ vim.pack.add({
 	{ src = "https://github.com/echasnovski/mini.pick" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://codeberg.org/ziglang/zig.vim" },
-	-- { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 })
 
 -- Set the colorscheme
@@ -101,6 +101,33 @@ vim.keymap.set('n', '<CR>', function()
 	end
 end, { desc = "Clear search highlight on Enter" })
 
+-- Setup HLSL filetype extensions
+vim.filetype.add({
+  extension = {
+    hlsl = "hlsl",
+  },
+  pattern = {
+    [".*%.vert%.hlsl"] = "hlsl",
+    [".*%.frag%.hlsl"] = "hlsl",
+    [".*%.comp%.hlsl"] = "hlsl",
+  },
+})
+
+local ts_group = vim.api.nvim_create_augroup("TreesitterStarter", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = ts_group,
+    pattern = { "hlsl", "zig", "c", "cpp", "lua" },
+    callback = function(args)
+        local _, _ = pcall(vim.treesitter.start, args.buf)
+    end,
+})
+
+-- Setup Treesitter
+require'nvim-treesitter'.setup { install_dir = vim.fn.stdpath('data') .. '/site' }
+require'nvim-treesitter'.install { 'lua', 'vim', 'vimdoc', 'c', 'cpp', 'zig', 'hlsl' }
+vim.treesitter.language.register('hlsl', { 'hlsl' })
+
+
 -- Terminal setup
 local term_bufnr = nil
 local term = "bash"
@@ -163,14 +190,14 @@ vim.g.zig_fmt_parse_errors = 0
 vim.g.zig_fmt_autosave = 0
 
 vim.lsp.config("zls", {
-	cmd = {'zls'},
+	cmd = { 'zls' },
 	filetypes = { 'zig' },
 	root_markers = { 'build.zig' },
 })
 vim.lsp.enable({ "zls" })
 
 vim.api.nvim_create_autocmd('BufWritePre', {
-	pattern = {"*.zig", "*.zon"},
+	pattern = { "*.zig", "*.zon" },
 	callback = function(ev)
 		vim.lsp.buf.format()
 	end
@@ -194,31 +221,27 @@ local function toggle_qf()
 	end
 end
 
-local function toggle_loclist()
-	local is_open = false
-	for _, win in ipairs(vim.fn.getwininfo()) do
-		if win.quickfix == 1 then
-			is_open = true
-			break
-		end
-	end
-
-	if is_open then
-		vim.cmd("lclose")
-	else
-		vim.cmd("lopen")
-	end
-end
+-- local function toggle_loclist()
+-- 	local is_open = false
+-- 	for _, win in ipairs(vim.fn.getwininfo()) do
+-- 		if win.quickfix == 1 then
+-- 			is_open = true
+-- 			break
+-- 		end
+-- 	end
+--
+-- 	if is_open then
+-- 		vim.cmd("lclose")
+-- 	else
+-- 		vim.cmd("lopen")
+-- 	end
+-- end
 
 vim.keymap.set('n', '<leader>cd', vim.diagnostic.open_float, { desc = "Show line diagnostics" })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to prev diagnostics" })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostics" })
-vim.keymap.set('n', '<leader>cq', toggle_loclist, { desc = "Open local list" })
-vim.keymap.set('n', '<leader>cqq', toggle_qf, { desc = "Open quickfix list" })
-vim.keymap.set('n', '<leader>cD', function()
-	vim.diagnostic.setqflist({ open = false })
-	vim.diagnostic.setloclist({ open = false })
-end, { desc = "Populate quickfix list and local list with diagnostics" })
+-- vim.keymap.set('n', '<leader>cq', toggle_loclist, { desc = "Open local list" })
+vim.keymap.set('n', '<leader>k', toggle_qf, { desc = "Open quickfix list" })
 vim.keymap.set('n', '<leader>cf', function() vim.lsp.buf.format({ async = true }) end,
 	{ desc = "Format current buffer with LSP" })
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "Run LSP Code Actions on current buffer" })
@@ -253,7 +276,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- noinsert don't insert the first match automatically
 -- noselect Don't have omnicomplete autoselect the first thing
 -- preview show documentation in preview window
-vim.cmd("set completeopt+=menu,menuone,noinsert,noselect,preview")
+vim.cmd("set completeopt+=menu,menuone,noinsert,preview")
 vim.opt.pumheight = 10
 
 --- Setup Pick(er)
@@ -417,7 +440,7 @@ vim.keymap.set('n', '<leader>e', function() require('oil').toggle_float() end, {
 
 
 -- """" Old vimrc from 2016
--- " Vimrc for connorw 
+-- " Vimrc for connorw
 --
 -- " Setup Vundle
 -- "set nocompatible

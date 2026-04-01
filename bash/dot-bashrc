@@ -7,6 +7,7 @@
 
 alias ls='eza -F --color=always --icons=always'
 alias la="ls -a"
+alias ll="ls -al"
 alias cat='bat'
 alias grep='ugrep'
 alias vi='nvim'
