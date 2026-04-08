@@ -1,0 +1,65 @@
+## Themeing
+
+# Other decent themes
+#theme = Nord Wave
+#theme = Gruvbox Dark Hard
+#theme = Kanso Zen
+#theme = Sonokai
+#theme = Spacegray Eighties
+#theme = Gruvbox Dark
+#theme = Gruvbox Material Dark
+#theme = Hybrid
+#theme = Kanso Ink
+#theme = Miasma
+#theme = Monokai Pro Spectrum
+#theme = Tomorrow Night
+theme = Kurokula
+
+unfocused-split-opacity = 0.5
+window-theme = system
+
+font-family = SauceCodePro NF
+font-size = 12
+
+adjust-cursor-thickness = +50%
+cursor-color = cell-foreground
+cursor-opacity = 0.7
+cursor-style = block
+
+mouse-hide-while-typing = true
+
+# stop shell from forcing bar cursor
+shell-integration-features = no-cursor
+
+background-opacity = 0.93
+background-blur = false
+
+scrollbar = never
+
+## Keybinds
+
+keybind = super+ctrl+alt+arrow_down=resize_split:down,10
+keybind = super+ctrl+alt+arrow_left=resize_split:left,10
+keybind = super+ctrl+alt+arrow_right=resize_split:right,10
+keybind = super+ctrl+alt+arrow_up=resize_split:up,10
+
+keybind = super+ctrl+alt+j=resize_split:down,10
+keybind = super+ctrl+alt+h=resize_split:left,10
+keybind = super+ctrl+alt+l=resize_split:right,10
+keybind = super+ctrl+alt+k=resize_split:up,10
+
+keybind = super+ctrl+alt+[=goto_split:previous
+keybind = super+ctrl+alt+]=goto_split:next
+
+# vim like nav for splits
+keybind = ctrl+alt+j=goto_split:down
+keybind = ctrl+alt+k=goto_split:up
+keybind = ctrl+alt+l=goto_split:right
+keybind = ctrl+alt+h=goto_split:left
+
+keybind = ctrl+shift+t=toggle_quick_terminal
+keybind = ctrl+alt+enter=toggle_split_zoom
+
+## Other
+focus-follows-mouse = true
+maximize = true
