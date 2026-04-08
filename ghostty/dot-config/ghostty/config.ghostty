@@ -57,7 +57,8 @@ keybind = ctrl+alt+k=goto_split:up
 keybind = ctrl+alt+l=goto_split:right
 keybind = ctrl+alt+h=goto_split:left
 
-keybind = ctrl+shift+t=toggle_quick_terminal
+keybind = ctrl+alt+t=toggle_quick_terminal
+keybind = ctrl+shift+t=new_tab
 keybind = ctrl+alt+enter=toggle_split_zoom
 
 ## Other
