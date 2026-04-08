@@ -7,13 +7,10 @@
 
 # Get the aliases and functions
 [ -f $HOME/.bashrc ] && . $HOME/.bashrc
-. "/home/connor/.local/share/bob/env/env.sh"
 
 export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.local/share/bob/nvim-bin"
 export PATH="$PATH:$HOME/.local/scripts"
 
 export EDITOR='nvim'
 export VISUAL='nvim'
 export GREP='ugrep'
-. "$HOME/.cargo/env"

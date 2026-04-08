@@ -24,4 +24,3 @@ alias chgrp='chgrp --preserve-root'
 alias mkdir='mkdir -p'
 
 PS1='[\u@\h \W]\$ '
-. "$HOME/.cargo/env"
