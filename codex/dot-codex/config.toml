@@ -1,0 +1,5 @@
+[projects."/home/connorw/Code/baito"]
+trust_level = "trusted"
+
+[sandbox_workspace_write]
+writable_roots = ["/home/connorw/.cache/zig"]

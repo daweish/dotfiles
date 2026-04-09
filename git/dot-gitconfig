@@ -12,10 +12,11 @@
 	diffFilter = delta --color-only
 
 [delta]
+	features = corvus
 	navigate = true  # use n and N to move between diff sections
 	dark = true      # or light = true, or omit for auto-detection
-	features = corvus
 	side-by-side = true
+	hunk-header-style = file line-number syntax bold italic
 
 [merge]
 	conflictStyle = zdiff3
