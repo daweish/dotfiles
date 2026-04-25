@@ -24,3 +24,8 @@ alias chgrp='chgrp --preserve-root'
 alias mkdir='mkdir -p'
 
 PS1='[\u@\h \W]\$ '
+
+# ZVM
+export ZVM_INSTALL="$HOME/.zvm/self"
+export PATH="$PATH:$HOME/.zvm/bin"
+export PATH="$PATH:$ZVM_INSTALL/"

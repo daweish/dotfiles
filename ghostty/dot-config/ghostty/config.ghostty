@@ -26,7 +26,6 @@ cursor-color = cell-foreground
 cursor-opacity = 0.7
 cursor-style = block
 
-mouse-hide-while-typing = true
 
 # stop shell from forcing bar cursor
 shell-integration-features = no-cursor
@@ -62,5 +61,6 @@ keybind = ctrl+shift+t=new_tab
 keybind = ctrl+alt+enter=toggle_split_zoom
 
 ## Other
-focus-follows-mouse = true
+focus-follows-mouse = false
+mouse-hide-while-typing = true
 maximize = true

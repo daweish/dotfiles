@@ -76,6 +76,8 @@ vim.keymap.set('n', '<leader>q', ':quit<CR>')
 vim.keymap.set('n', '<leader>i', '<CMD>e $MYVIMRC<CR>')
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>y', '"+y<CR>') -- yank to system clipboard
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>d', '"+d<CR>') -- delete to system clipboard
+-- vim.keymap.set({ 'n', 'v', }, '<ALT>j', ':m -1<CR>') -- move a line down 1
+-- vim.keymap.set({ 'n', 'v', }, '<ALT>k', ':m +1<CR>') -- move a line up 1
 
 vim.keymap.set('n', '<leader>m', function()
 	vim.fn.setqflist({}, 'r')
